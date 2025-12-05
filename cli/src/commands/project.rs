@@ -48,7 +48,7 @@ async fn list(client: &ApiClient) -> Result<()> {
         return Ok(());
     }
 
-    println!("{:<20} {:<30} {}", "SLUG", "NAME", "PUBLIC");
+    println!("{:<20} {:<30} PUBLIC", "SLUG", "NAME");
     println!("{}", "-".repeat(60));
 
     for project in projects {

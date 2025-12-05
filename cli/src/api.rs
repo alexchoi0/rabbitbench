@@ -222,6 +222,7 @@ struct GraphQLError {
     message: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Project {
     pub id: String,
@@ -231,6 +232,7 @@ pub struct Project {
     pub public: bool,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct ProjectDetails {
     pub id: String,
@@ -244,24 +246,28 @@ pub struct ProjectDetails {
     pub measures: Vec<Measure>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Branch {
     pub id: String,
     pub name: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Testbed {
     pub id: String,
     pub name: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Benchmark {
     pub id: String,
     pub name: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Measure {
     pub id: String,
@@ -280,6 +286,7 @@ pub struct MetricInput {
     pub upper_value: Option<f64>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Report {
     pub id: String,
@@ -288,6 +295,7 @@ pub struct Report {
     pub alerts: Vec<Alert>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 pub struct Alert {
     pub id: String,

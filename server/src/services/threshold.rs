@@ -40,6 +40,7 @@ pub fn check_threshold(
     None
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct ThresholdViolation {
     pub baseline_value: f64,

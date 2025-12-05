@@ -9,7 +9,7 @@ fn fibonacci(n: u64) -> u64 {
 }
 
 fn sorting_benchmark(c: &mut Criterion) {
-    let mut data: Vec<i32> = (0..1000).rev().collect();
+    let data: Vec<i32> = (0..1000).rev().collect();
 
     c.bench_function("sort_1000", |b| {
         b.iter(|| {

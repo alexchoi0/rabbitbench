@@ -20,6 +20,7 @@ pub use schema::AppSchema;
 use mutation::MutationRoot;
 use query::QueryRoot;
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct AuthContext {
     pub user_id: String,

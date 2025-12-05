@@ -71,6 +71,7 @@ impl QueryRoot {
         Ok(project.map(ProjectType::from))
     }
 
+    #[allow(clippy::too_many_arguments)]
     async fn perf(
         &self,
         ctx: &Context<'_>,

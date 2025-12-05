@@ -39,6 +39,7 @@ pub async fn get_project_by_slug(
         .await
 }
 
+#[allow(dead_code)]
 pub async fn get_project_by_id(pool: &PgPool, id: Uuid) -> Result<Option<Project>, sqlx::Error> {
     sqlx::query_as::<_, Project>("SELECT * FROM projects WHERE id = $1")
         .bind(id)

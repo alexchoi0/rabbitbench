@@ -2,6 +2,7 @@ use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CriterionResult {
     pub name: String,
@@ -10,12 +11,14 @@ pub struct CriterionResult {
     pub upper: Option<f64>,
 }
 
+#[allow(dead_code)]
 static CRITERION_REGEX: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
         r"(?m)^(\S+)\s+time:\s+\[([0-9.]+)\s+(ns|µs|ms|s)\s+([0-9.]+)\s+(ns|µs|ms|s)\s+([0-9.]+)\s+(ns|µs|ms|s)\]"
     ).unwrap()
 });
 
+#[allow(dead_code)]
 pub fn parse_criterion_output(output: &str) -> Vec<CriterionResult> {
     CRITERION_REGEX
         .captures_iter(output)
@@ -35,6 +38,7 @@ pub fn parse_criterion_output(output: &str) -> Vec<CriterionResult> {
         .collect()
 }
 
+#[allow(dead_code)]
 fn parse_time(value: &str, unit: &str) -> Option<f64> {
     let v: f64 = value.parse().ok()?;
     let multiplier = match unit {
