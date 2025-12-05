@@ -1,0 +1,43 @@
+# Rust
+/target/
+Cargo.lock
+
+# Node
+node_modules/
+.next/
+out/
+.vercel
+
+# Environment
+.env
+.env.local
+.env.*.local
+web/.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build
+dist/
+build/
+
+# Playwright
+/web/test-results/
+/web/playwright-report/
+/web/blob-report/
+/web/playwright/.cache/

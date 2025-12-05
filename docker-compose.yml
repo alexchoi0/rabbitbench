@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: rabbitbench-db
+    environment:
+      POSTGRES_USER: rabbitbench
+      POSTGRES_PASSWORD: rabbitbench
+      POSTGRES_DB: rabbitbench
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rabbitbench"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    command: ["postgres", "-c", "listen_addresses=*"]
+
+volumes:
+  postgres_data:
