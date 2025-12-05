@@ -3,8 +3,8 @@ use chrono::{DateTime, Utc};
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::db::{models, queries};
 use super::{BenchmarkType, BranchType, MeasureType, TestbedType, ThresholdType};
+use crate::db::{models, queries};
 
 #[derive(SimpleObject)]
 #[graphql(complex)]

@@ -5,8 +5,8 @@ use std::collections::HashMap;
 use uuid::Uuid;
 
 use crate::db::queries;
-use crate::graphql::AuthContext;
 use crate::graphql::types::*;
+use crate::graphql::AuthContext;
 
 pub struct QueryRoot;
 
@@ -71,6 +71,7 @@ impl QueryRoot {
         Ok(project.map(ProjectType::from))
     }
 
+    #[allow(clippy::too_many_arguments)]
     async fn perf(
         &self,
         ctx: &Context<'_>,

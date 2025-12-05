@@ -26,6 +26,7 @@ pub async fn create_report(
     .await
 }
 
+#[allow(dead_code)]
 pub async fn get_report_by_id(pool: &PgPool, id: Uuid) -> Result<Option<Report>, sqlx::Error> {
     sqlx::query_as::<_, Report>("SELECT * FROM reports WHERE id = $1")
         .bind(id)
@@ -73,7 +74,10 @@ pub async fn create_metric(
     .await
 }
 
-pub async fn get_report_metrics(pool: &PgPool, report_id: Uuid) -> Result<Vec<Metric>, sqlx::Error> {
+pub async fn get_report_metrics(
+    pool: &PgPool,
+    report_id: Uuid,
+) -> Result<Vec<Metric>, sqlx::Error> {
     sqlx::query_as::<_, Metric>("SELECT * FROM metrics WHERE report_id = $1")
         .bind(report_id)
         .fetch_all(pool)
@@ -100,6 +104,7 @@ pub struct PerfDataPoint {
     pub created_at: DateTime<Utc>,
 }
 
+#[allow(clippy::too_many_arguments)]
 pub async fn get_perf_data(
     pool: &PgPool,
     project_id: Uuid,
@@ -179,6 +184,7 @@ pub async fn get_baseline_metrics(
     Ok(rows)
 }
 
+#[allow(clippy::too_many_arguments)]
 pub async fn create_threshold(
     pool: &PgPool,
     project_id: Uuid,
@@ -357,14 +363,13 @@ pub async fn get_report_alerts(pool: &PgPool, report_id: Uuid) -> Result<Vec<Ale
 }
 
 pub async fn dismiss_alert(pool: &PgPool, id: Uuid) -> Result<Alert, sqlx::Error> {
-    sqlx::query_as::<_, Alert>(
-        "UPDATE alerts SET status = 'dismissed' WHERE id = $1 RETURNING *",
-    )
-    .bind(id)
-    .fetch_one(pool)
-    .await
+    sqlx::query_as::<_, Alert>("UPDATE alerts SET status = 'dismissed' WHERE id = $1 RETURNING *")
+        .bind(id)
+        .fetch_one(pool)
+        .await
 }
 
+#[allow(dead_code)]
 pub async fn get_alert_by_id(pool: &PgPool, id: Uuid) -> Result<Option<Alert>, sqlx::Error> {
     sqlx::query_as::<_, Alert>("SELECT * FROM alerts WHERE id = $1")
         .bind(id)

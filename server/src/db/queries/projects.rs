@@ -1,7 +1,7 @@
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::db::models::{Branch, Measure, Project, Testbed, Benchmark};
+use crate::db::models::{Benchmark, Branch, Measure, Project, Testbed};
 
 pub async fn create_project(
     pool: &PgPool,
@@ -32,15 +32,14 @@ pub async fn get_project_by_slug(
     user_id: Uuid,
     slug: &str,
 ) -> Result<Option<Project>, sqlx::Error> {
-    sqlx::query_as::<_, Project>(
-        "SELECT * FROM projects WHERE user_id = $1 AND slug = $2",
-    )
-    .bind(user_id)
-    .bind(slug)
-    .fetch_optional(pool)
-    .await
+    sqlx::query_as::<_, Project>("SELECT * FROM projects WHERE user_id = $1 AND slug = $2")
+        .bind(user_id)
+        .bind(slug)
+        .fetch_optional(pool)
+        .await
 }
 
+#[allow(dead_code)]
 pub async fn get_project_by_id(pool: &PgPool, id: Uuid) -> Result<Option<Project>, sqlx::Error> {
     sqlx::query_as::<_, Project>("SELECT * FROM projects WHERE id = $1")
         .bind(id)
@@ -114,12 +113,10 @@ pub async fn get_project_branches(
     pool: &PgPool,
     project_id: Uuid,
 ) -> Result<Vec<Branch>, sqlx::Error> {
-    sqlx::query_as::<_, Branch>(
-        "SELECT * FROM branches WHERE project_id = $1 ORDER BY name",
-    )
-    .bind(project_id)
-    .fetch_all(pool)
-    .await
+    sqlx::query_as::<_, Branch>("SELECT * FROM branches WHERE project_id = $1 ORDER BY name")
+        .bind(project_id)
+        .fetch_all(pool)
+        .await
 }
 
 pub async fn get_or_create_testbed(
@@ -145,12 +142,10 @@ pub async fn get_project_testbeds(
     pool: &PgPool,
     project_id: Uuid,
 ) -> Result<Vec<Testbed>, sqlx::Error> {
-    sqlx::query_as::<_, Testbed>(
-        "SELECT * FROM testbeds WHERE project_id = $1 ORDER BY name",
-    )
-    .bind(project_id)
-    .fetch_all(pool)
-    .await
+    sqlx::query_as::<_, Testbed>("SELECT * FROM testbeds WHERE project_id = $1 ORDER BY name")
+        .bind(project_id)
+        .fetch_all(pool)
+        .await
 }
 
 pub async fn get_or_create_measure(
@@ -179,12 +174,10 @@ pub async fn get_project_measures(
     pool: &PgPool,
     project_id: Uuid,
 ) -> Result<Vec<Measure>, sqlx::Error> {
-    sqlx::query_as::<_, Measure>(
-        "SELECT * FROM measures WHERE project_id = $1 ORDER BY name",
-    )
-    .bind(project_id)
-    .fetch_all(pool)
-    .await
+    sqlx::query_as::<_, Measure>("SELECT * FROM measures WHERE project_id = $1 ORDER BY name")
+        .bind(project_id)
+        .fetch_all(pool)
+        .await
 }
 
 pub async fn get_or_create_benchmark(
@@ -210,10 +203,8 @@ pub async fn get_project_benchmarks(
     pool: &PgPool,
     project_id: Uuid,
 ) -> Result<Vec<Benchmark>, sqlx::Error> {
-    sqlx::query_as::<_, Benchmark>(
-        "SELECT * FROM benchmarks WHERE project_id = $1 ORDER BY name",
-    )
-    .bind(project_id)
-    .fetch_all(pool)
-    .await
+    sqlx::query_as::<_, Benchmark>("SELECT * FROM benchmarks WHERE project_id = $1 ORDER BY name")
+        .bind(project_id)
+        .fetch_all(pool)
+        .await
 }

@@ -1,10 +1,10 @@
-use async_graphql::{ComplexObject, Context, Object, Result, SimpleObject, ID};
+use async_graphql::{ComplexObject, Context, Result, SimpleObject, ID};
 use chrono::{DateTime, Utc};
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::db::{models, queries};
 use super::ProjectType;
+use crate::db::{models, queries};
 
 #[derive(SimpleObject)]
 #[graphql(complex)]

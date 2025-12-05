@@ -40,6 +40,7 @@ pub fn check_threshold(
     None
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct ThresholdViolation {
     pub baseline_value: f64,
@@ -56,10 +57,14 @@ pub enum ViolationType {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use uuid::Uuid;
     use chrono::Utc;
+    use uuid::Uuid;
 
-    fn create_test_threshold(upper: Option<f64>, lower: Option<f64>, min_samples: i32) -> Threshold {
+    fn create_test_threshold(
+        upper: Option<f64>,
+        lower: Option<f64>,
+        min_samples: i32,
+    ) -> Threshold {
         Threshold {
             id: Uuid::new_v4(),
             project_id: Uuid::new_v4(),

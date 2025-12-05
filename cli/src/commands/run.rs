@@ -30,9 +30,9 @@ pub async fn handle(args: RunArgs, api_url: &str) -> Result<()> {
     let config = Config::load()?;
     let client = ApiClient::new(api_url, &config.token);
 
-    let testbed = args.testbed.unwrap_or_else(|| {
-        std::env::consts::OS.to_string()
-    });
+    let testbed = args
+        .testbed
+        .unwrap_or_else(|| std::env::consts::OS.to_string());
 
     let git_hash = args.hash.or_else(|| {
         Command::new("git")
@@ -86,8 +86,14 @@ pub async fn handle(args: RunArgs, api_url: &str) -> Result<()> {
 
     println!("Found {} benchmark results:", results.len());
     for result in &results {
-        let lower = result.lower.map(|v| format!("{:.2}", v)).unwrap_or_default();
-        let upper = result.upper.map(|v| format!("{:.2}", v)).unwrap_or_default();
+        let lower = result
+            .lower
+            .map(|v| format!("{:.2}", v))
+            .unwrap_or_default();
+        let upper = result
+            .upper
+            .map(|v| format!("{:.2}", v))
+            .unwrap_or_default();
         println!(
             "  {} : {:.2} ns [{} - {}]",
             result.name, result.value, lower, upper
@@ -113,7 +119,13 @@ pub async fn handle(args: RunArgs, api_url: &str) -> Result<()> {
 
     println!("Submitting results...");
     let report = client
-        .create_report(&args.project, &args.branch, &testbed, git_hash.as_deref(), metrics)
+        .create_report(
+            &args.project,
+            &args.branch,
+            &testbed,
+            git_hash.as_deref(),
+            metrics,
+        )
         .await?;
 
     println!("Report submitted: {}", report.id);

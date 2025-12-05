@@ -34,6 +34,7 @@ pub async fn get_user_by_id(pool: &PgPool, id: Uuid) -> Result<Option<User>, sql
         .await
 }
 
+#[allow(dead_code)]
 pub async fn get_user_by_email(pool: &PgPool, email: &str) -> Result<Option<User>, sqlx::Error> {
     sqlx::query_as::<_, User>("SELECT * FROM users WHERE email = $1")
         .bind(email)
