@@ -42,7 +42,9 @@ async fn list(client: &ApiClient) -> Result<()> {
 
     if projects.is_empty() {
         println!("No projects found.");
-        println!("Create one with: benchctl project create --slug my-project --name \"My Project\"");
+        println!(
+            "Create one with: benchctl project create --slug my-project --name \"My Project\""
+        );
         return Ok(());
     }
 
@@ -64,7 +66,9 @@ async fn create(
     description: Option<&str>,
     public: bool,
 ) -> Result<()> {
-    let project = client.create_project(slug, name, description, public).await?;
+    let project = client
+        .create_project(slug, name, description, public)
+        .await?;
     println!("Created project: {} ({})", project.name, project.slug);
     Ok(())
 }

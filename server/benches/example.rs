@@ -21,9 +21,7 @@ fn sorting_benchmark(c: &mut Criterion) {
 }
 
 fn fibonacci_benchmark(c: &mut Criterion) {
-    c.bench_function("fibonacci_20", |b| {
-        b.iter(|| fibonacci(black_box(20)))
-    });
+    c.bench_function("fibonacci_20", |b| b.iter(|| fibonacci(black_box(20))));
 }
 
 criterion_group!(benches, sorting_benchmark, fibonacci_benchmark);

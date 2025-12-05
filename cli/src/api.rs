@@ -70,9 +70,8 @@ impl ApiClient {
             }
         }
 
-        body.data.ok_or_else(|| {
-            anyhow::anyhow!("No data in response (status: {})", status)
-        })
+        body.data
+            .ok_or_else(|| anyhow::anyhow!("No data in response (status: {})", status))
     }
 
     pub async fn list_projects(&self) -> Result<Vec<Project>> {

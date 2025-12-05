@@ -4,8 +4,8 @@ use uuid::Uuid;
 
 use crate::auth::{generate_api_token, hash_api_token};
 use crate::db::queries;
-use crate::graphql::AuthContext;
 use crate::graphql::types::*;
+use crate::graphql::AuthContext;
 use crate::services::check_threshold;
 
 pub struct MutationRoot;
@@ -168,7 +168,11 @@ impl MutationRoot {
         Ok(queries::delete_project(pool, project.id).await?)
     }
 
-    async fn create_report(&self, ctx: &Context<'_>, input: CreateReportInput) -> Result<ReportType> {
+    async fn create_report(
+        &self,
+        ctx: &Context<'_>,
+        input: CreateReportInput,
+    ) -> Result<ReportType> {
         let auth = ctx
             .data_opt::<AuthContext>()
             .ok_or_else(|| async_graphql::Error::new("Not authenticated"))?;
@@ -218,11 +222,7 @@ impl MutationRoot {
             .await?;
 
             let thresholds = queries::get_applicable_thresholds(
-                pool,
-                project.id,
-                branch.id,
-                testbed.id,
-                measure.id,
+                pool, project.id, branch.id, testbed.id, measure.id,
             )
             .await?;
 

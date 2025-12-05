@@ -1,9 +1,9 @@
-pub mod users;
-pub mod projects;
 pub mod benchmarks;
+pub mod projects;
 pub mod reports;
+pub mod users;
 
-pub use users::*;
-pub use projects::*;
 pub use benchmarks::*;
+pub use projects::*;
 pub use reports::*;
+pub use users::*;

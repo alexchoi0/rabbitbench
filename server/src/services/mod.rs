@@ -1,5 +1,5 @@
-pub mod threshold;
 pub mod criterion;
+pub mod threshold;
 
-pub use threshold::*;
 pub use criterion::*;
+pub use threshold::*;

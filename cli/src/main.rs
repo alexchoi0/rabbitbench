@@ -2,9 +2,9 @@ use anyhow::Result;
 use clap::{Parser, Subcommand};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+mod adapters;
 mod api;
 mod commands;
-mod adapters;
 
 use commands::{auth, project, run};
 
@@ -16,7 +16,11 @@ struct Cli {
     #[command(subcommand)]
     command: Commands,
 
-    #[arg(long, env = "RABBITBENCH_API_URL", default_value = "http://localhost:8080")]
+    #[arg(
+        long,
+        env = "RABBITBENCH_API_URL",
+        default_value = "http://localhost:8080"
+    )]
     api_url: String,
 }
 

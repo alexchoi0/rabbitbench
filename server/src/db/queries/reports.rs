@@ -73,7 +73,10 @@ pub async fn create_metric(
     .await
 }
 
-pub async fn get_report_metrics(pool: &PgPool, report_id: Uuid) -> Result<Vec<Metric>, sqlx::Error> {
+pub async fn get_report_metrics(
+    pool: &PgPool,
+    report_id: Uuid,
+) -> Result<Vec<Metric>, sqlx::Error> {
     sqlx::query_as::<_, Metric>("SELECT * FROM metrics WHERE report_id = $1")
         .bind(report_id)
         .fetch_all(pool)
@@ -357,12 +360,10 @@ pub async fn get_report_alerts(pool: &PgPool, report_id: Uuid) -> Result<Vec<Ale
 }
 
 pub async fn dismiss_alert(pool: &PgPool, id: Uuid) -> Result<Alert, sqlx::Error> {
-    sqlx::query_as::<_, Alert>(
-        "UPDATE alerts SET status = 'dismissed' WHERE id = $1 RETURNING *",
-    )
-    .bind(id)
-    .fetch_one(pool)
-    .await
+    sqlx::query_as::<_, Alert>("UPDATE alerts SET status = 'dismissed' WHERE id = $1 RETURNING *")
+        .bind(id)
+        .fetch_one(pool)
+        .await
 }
 
 pub async fn get_alert_by_id(pool: &PgPool, id: Uuid) -> Result<Option<Alert>, sqlx::Error> {

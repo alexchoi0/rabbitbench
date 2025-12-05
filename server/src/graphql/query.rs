@@ -5,8 +5,8 @@ use std::collections::HashMap;
 use uuid::Uuid;
 
 use crate::db::queries;
-use crate::graphql::AuthContext;
 use crate::graphql::types::*;
+use crate::graphql::AuthContext;
 
 pub struct QueryRoot;
 

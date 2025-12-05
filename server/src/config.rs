@@ -16,10 +16,8 @@ impl Config {
             .unwrap_or(false);
 
         Ok(Self {
-            database_url: env::var("DATABASE_URL")
-                .context("DATABASE_URL must be set")?,
-            auth_secret: env::var("AUTH_SECRET")
-                .context("AUTH_SECRET must be set")?,
+            database_url: env::var("DATABASE_URL").context("DATABASE_URL must be set")?,
+            auth_secret: env::var("AUTH_SECRET").context("AUTH_SECRET must be set")?,
             port: env::var("PORT")
                 .unwrap_or_else(|_| "8080".to_string())
                 .parse()
